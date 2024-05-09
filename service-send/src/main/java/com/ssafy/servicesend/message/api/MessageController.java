@@ -1,4 +1,4 @@
-package com.ssafy.servicesend.controller;
+package com.ssafy.servicesend.message.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("*")
-public class TestController {
+@RequestMapping("/api/chat")
+public class MessageController {
 
-    @GetMapping("/test")
-    public ResponseEntity<?> getReply() {
+    @GetMapping("/health-check")
+    public ResponseEntity<?> healthCheck() {
 
-        return new ResponseEntity<String>("test", HttpStatus.OK);
+        return new ResponseEntity<String>("healthy", HttpStatus.OK);
     }
 }
