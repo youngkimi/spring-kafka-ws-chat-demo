@@ -10,18 +10,20 @@
 - Apache Kafka를 이용하기 위해서는 Apache Zookeeper가 필요하다.
 - Zookeeper로 부터 의존성을 제거 중. (24.01.15)
 - Zookeeper는 Kafka (클러스터) 들을 관리해주는 관리 프로그램.
-- [Apache Zookeeper](https://zookeeper.apache.org/releases.html) (3.8.3)
-- [Apache Kafka](https://kafka.apache.org/downloads) (kafka_2.13-3.6.1.tgz)
+- [Apache Zookeeper](https://zookeeper.apache.org/releases.html)
+- [Apache Kafka](https://kafka.apache.org/downloads)
 
-### Apache Zookeeper 사용
+### Apache Zookeeper / Kafka
 
-설치한 Kafka 디렉토리의 `bin/windows` 로 가서 Shell을 연다.
+Image : bitnami/zookeeper:3.9.2, bitnami/kafka:3.6.2
+
+`docker-compose -f docker-compose.kafka.yml up -d`
 
 - Zookeeper 실행 (실행 시에 설정 파일을 같이 지정해줘야 한다.)
   - `./zookeeper-server-start.bat ../../config/zookeeper.properties`
   - 기본 포트는 2181로 할당.
 
-### Apache Kafka 사용
+### Apache 사용
 
 동일한 디렉토리에서 쉘을 하나 더 연다.
 

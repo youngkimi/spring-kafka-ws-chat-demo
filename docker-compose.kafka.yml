@@ -1,18 +1,29 @@
 version: "3"
 services:
   zookeeper:
-    image: zookeeper:latest
+    image: zookeeper
     container_name: zookeeper
+    restart: always
+    hostname: zoo1
     ports:
-      - "2181:2181"
+      - 2181:2181 # 클라이언트 포트
+    # volumes:
+    #   - /zoo.cfg:/conf/zoo.cfg
+    environment:
+      ZOO_MY_ID: 1
+      # 앙상블 서버들 지정. 과반수 선출 알고리즘을 사용하므로 보통 홀수개로 지정한다.
+      # 2888 = 팔로워 포트. 3888 선택 포트. 8080 어드민 포트.
+      # ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+      # 이후 Configuration 볼륨 옵션도 추가 예정 .
+
   kafka:
     image: bitnami/kafka:3.6.2
     container_name: kafka
     ports:
-      - "9092:9092"
+      - 9092:9092
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
-      KAFKA_CREATE_TOPICS: "topic:1:1"
+      KAFKA_CREATE_TOPICS: "topic-test"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock
