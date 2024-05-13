@@ -1,7 +1,6 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8081/gs-guide-websocket'
+    brokerURL: 'ws://localhost:8081/ws-stomp'
 });
-
 
 /**
  *
@@ -48,7 +47,7 @@ function disconnect() {
 
 function sendName() {
     stompClient.publish({
-        destination: "/api/chat/app/hello",
+        destination: "/app/hello",
         body: JSON.stringify({'name': $("#name").val()})
     });
 }

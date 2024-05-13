@@ -13,16 +13,23 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		// 내부에서 작동하는 부분. /topic 구독하는 사람들에게 알림과 메세지를 줌.
+		// config.enableSimpleBroker("/room");
+		// 외부에서 사용하는 부분. 클라이언트가 /app 경로를 통해서 메세지를 발송함.
+		// config.setApplicationDestinationPrefixes("/send");
+
+		// 내부에서 작동하는 부분. /topic 구독하는 사람들에게 알림과 메세지를 줌.
 		config.enableSimpleBroker("/topic");
 		// 외부에서 사용하는 부분. 클라이언트가 /app 경로를 통해서 메세지를 발송함.
-		config.setApplicationDestinationPrefixes("/api/chat/app");
+		config.setApplicationDestinationPrefixes("/app");
 	}
 
 	// TODO endPoint 동적으로 변경.
 	// TODO Security 설정 필요.
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/gs-guide-websocket");
+		registry.addEndpoint("/ws-stomp");
+		// registry.addEndpoint("/ws-stomp")
+		// 	.withSockJS();
 	}
 
 }
