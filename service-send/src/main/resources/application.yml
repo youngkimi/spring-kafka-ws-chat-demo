@@ -1,10 +1,30 @@
 server:
   port: 8081
 
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/message?serverTimezone=UTC&characterEncoding=UTF-8
-    username: admin
-    password: admin
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Seoul
+        dialect: org.hibernate.dialect.MySQLDialect
+        transaction:
+          jta:
+            platform=org:
+              hibernate:
+                service:
+                  jta:
+                    platform:
+                      internal:
+                        JBossStandAloneJtaPlatform:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+kafka:
+  bootstrap-server: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}

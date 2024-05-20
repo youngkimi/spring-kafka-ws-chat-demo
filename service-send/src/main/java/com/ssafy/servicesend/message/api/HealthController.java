@@ -1,26 +1,30 @@
 package com.ssafy.servicesend.message.api;
 
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.HtmlUtils;
 
-import com.ssafy.servicesend.message.dto.Greeting;
-import com.ssafy.servicesend.message.dto.HelloMessage;
 import com.ssafy.servicesend.message.service.ChatService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RestController
+@RestController @CrossOrigin("*")
 public class HealthController {
 
     private final ChatService chatService;
-    
-    @GetMapping("/hello")
-    public Greeting greeting() {
-        return new Greeting("health-check OK!");
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    @PostMapping("/test")
+    public ResponseEntity<?> createDiary(@RequestBody MessageDto message) {
+
+        System.out.println("API RECEIVED!");
+
+        kafkaTemplate.send("create-diary", message);
+
+        return ResponseEntity.ok().build();
     }
 }

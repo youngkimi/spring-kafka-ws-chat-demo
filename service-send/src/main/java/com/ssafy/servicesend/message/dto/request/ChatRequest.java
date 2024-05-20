@@ -1,12 +1,12 @@
-package com.ssafy.servicesend.message.dto;
+package com.ssafy.servicesend.message.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class Greeting {
-	private String content;
+public class ChatRequest {
+	String message;
 }

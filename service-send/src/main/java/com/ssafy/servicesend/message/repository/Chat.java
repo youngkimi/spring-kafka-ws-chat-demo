@@ -24,6 +24,4 @@ public class Chat {
 
 	Long senderId;
 
-
-
 }

@@ -38,7 +38,7 @@ Image : bitnami/zookeeper:3.9.2, bitnami/kafka:3.6.2
 - Topic은 일종의 데이터 파이프라인.
 - Create로 파이프라인을 생성하고, Producer는 해당 토픽으로 데이터를 밀어넣고 Consumer는 토픽을 구독한다.
 - `topic-1` 이라는 토픽을 생성해보자.  
-  `./kafka-topics.bat --create --bootstrap-server localhost:9092 --topic topic-1`\
+  `./kafka-topics.sh --zookeeper zookeeper-1:2181 --create --topic create-diary-dev --partitions 1 --replication-factor 1`\
 - 새로운 쉘을 두 개 열고 각각 다음의 Line을 적어 topic에 데이터를 push할 준비를 한다.
   `./kafka-console-producer.bat  --broker-list  localhost:9092 --topic topic-1`
   `./kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topic-1 --from-beginning`
